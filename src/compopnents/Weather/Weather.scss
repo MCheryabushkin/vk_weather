@@ -1,0 +1,17 @@
+.weather {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.temperature {
+    font-size: 48px;
+    padding-right: 30px;
+}
+.time {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 36px;
+}
