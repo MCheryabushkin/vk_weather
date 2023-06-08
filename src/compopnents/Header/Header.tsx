@@ -1,13 +1,15 @@
 import React, { SyntheticEvent, useState } from "react";
 import * as s from "./Header.scss";
+import { useMainStore } from "../../stores/MainContext";
 
 interface IProps {
-	name: String;
 	changeCity: (city: string) => void;
 }
 
-function Header({name, changeCity}: IProps) {
+
+function Header({changeCity}: IProps) {
 	const [inputVal, setInput] = useState<string | number | readonly string[]>('');
+	const mainStore = useMainStore();
 
 	const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = val.target;
@@ -24,7 +26,7 @@ function Header({name, changeCity}: IProps) {
 
 	return(
 		<div className={s.header}>
-			<p className={s.city}>{name}</p>
+			<p className={s.city}>{mainStore.city}</p>
 			<form>
 				<input type="text" 
 					onChange={onChange} 
