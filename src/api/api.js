@@ -26,8 +26,8 @@ class api {
         return `http://openweathermap.org/img/wn/${icon}@2x.png`;
     }
 
-    getCityByCoord(lat, lon) {
-        return this.getResource(`weather?lat=${lat}&lon=${lon}&appid=${KEYS.API_KEY}`);
+    async getCityByCoord(lat, lon) {
+        return await this.getResource(`weather?lat=${lat}&lon=${lon}&appid=${KEYS.API_KEY}`);
     }
 }
 
