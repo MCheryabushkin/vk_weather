@@ -4,24 +4,19 @@ import ForecastItem from "../ForecastItem/ForecastItem";
 
 import * as s from "./forecast.scss";
 import { DayWeather } from "../../interfaces";
+import { useMainStore } from "../../stores/MainContext";
 
-interface IPForecastList {
-    coord: {
-        lat: number,
-        lon: number
-    }
-}
-
-function ForecastList(props: IPForecastList) {
+function ForecastList() {
     const [list, setList] = useState<DayWeather[]>([]);
     const [isLoad, setLoading] = useState<Boolean>(false);
+    const { selectedCityData } = useMainStore();
 
     useEffect(() => {
         getData();
     }, []);
 
     function getData() {
-        const { lat, lon } = props.coord;
+        const { lat, lon } = selectedCityData.coord;
 
         api.get7DaysForecast(lat, lon)
             .then(res => {

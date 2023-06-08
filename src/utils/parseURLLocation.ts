@@ -1,4 +1,4 @@
-export const parseLocation = (location: string): string | Record<string, string> | undefined => {
+export const parseURLLocation = (location: string): string | Record<string, string> | undefined => {
     const {search} = window.location;
     const reg = new RegExp(/lat=\d+\.\d+&lon=\d+\.\d+/i);
     if (search && reg.test(search)) {

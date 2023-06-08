@@ -3,21 +3,19 @@ import { useParams } from "react-router-dom";
 import { observer, useObserver } from "mobx-react";
 
 import api from "../../api/api";
-import { WeatherData } from "../../interfaces";
 import { useMainStore } from "../../stores/MainContext";
-import { parseLocation } from "../../utils";
+import { parseURLLocation } from "../../utils";
 
-import Header from "../Header/Header";
 import ForecastList from "../Forecast/Forecast";
 import Weather from "../Weather/Weather";
+import { getOneDayWeather } from "../../helper";
 
 
 function Layout() {
-    const [data, setData] = useState<WeatherData>({} as WeatherData);
     const [isLoad, setLoading] = useState<Boolean>(false);
     const mainStore = useMainStore();
     const { location } = useParams();
-    const parsedLocation = parseLocation(location);
+    const parsedLocation = parseURLLocation(location);
     let defaultCity: string = "Saint Petersburg";
 
     useEffect(() => {
@@ -40,11 +38,11 @@ function Layout() {
             navigator.geolocation.getCurrentPosition(
                 async (e) => {
                     const { latitude, longitude } = e.coords;
-    
+
                     await api.getCityByCoord(latitude, longitude)
                         .then((res) => {
                             mainStore.setCity(res.name);
-                            setData(res);
+                            mainStore.setSelectedCityData(res);
                             setLoading(true);
                         })
                 }
@@ -53,32 +51,32 @@ function Layout() {
 
     }, []);
 
-    useEffect(getData, [mainStore.city]);
+    useEffect(() => {
+        defaultCity = mainStore.city;
+        getData();
+    }, [mainStore.city]);
 
     function getData() {
-        api.getOneDayWeather(mainStore.city)
-            .then((res) => {
-                setData(res);
+        getOneDayWeather({
+            success: (res) => {
+                mainStore.setSelectedCityData(res);
                 setLoading(true);
-            })
-            .catch((err) => {
+            },
+            fail: () => {
                 console.log("City not found");
                 mainStore.setCity(defaultCity);
-            });
-    }
-
-    function changeCity(newCity: string) {
-        defaultCity = mainStore.city;
-        mainStore.setCity(newCity);
+            }, 
+            city: mainStore.city,
+        });
     }
 
     return useObserver(() => (
         <>
-            <Header changeCity={changeCity} />
+            {/* <Header /> */}
             {isLoad ? (
                 <>
-                    <Weather data={data} />
-                    <ForecastList coord={data.coord} />
+                    <Weather />
+                    <ForecastList />
                 </>
             ) : (
                 <p>Load data...</p>

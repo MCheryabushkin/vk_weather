@@ -1,11 +1,12 @@
 import React from "react";
-import { WeatherData } from "../../interfaces";
 import { tempConvert, windDirection, getLocalTime } from "../../utils";
 
 import * as S from "./weather.scss";
+import { useMainStore } from "../../stores/MainContext";
 
-function Weather({ data }: { data: WeatherData }) {
-    const { main, wind, weather, timezone } = data;
+function Weather() {
+    const { selectedCityData } = useMainStore();
+    const { main, wind, weather, timezone } = selectedCityData;
     
     return (
         <div className={S.weather}>

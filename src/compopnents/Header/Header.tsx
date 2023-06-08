@@ -4,51 +4,26 @@ import { useMainStore } from "../../stores/MainContext";
 import cn from "classnames";
 
 import * as S from "./Header.scss";
-
-interface IProps {
-	changeCity: (city: string) => void;
-}
+import { NavLink } from "react-router-dom";
+import { observer } from "mobx-react";
 
 
-function Header({changeCity}: IProps) {
-	// const [inputVal, setInput] = useState<string | number | readonly string[]>('');
+function Header() {
 	const mainStore = useMainStore();
-	const [isMenuOpen, toggleMenu] = useState<Boolean>(false);
-
-	// const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-	// 	const {value} = val.target;
-		
-	// 	if (typeof value === 'string')
-	// 		setInput(val.target.value);
-	// }
-
-	// const onClick = (e: SyntheticEvent) => {
-	// 	e.preventDefault();
-	// 	changeCity(inputVal as string);
-	// 	setInput("");
-	// }
+	const [isMenuOpen, toggleMenu] = useState<Boolean>(false);	
 
 	return(
 		<>
 			<div className={S.header}>
 				<p className={S.city}>{mainStore.city}</p>
-				{/* <form>
-					<input type="text" 
-						onChange={onChange} 
-						value={inputVal}
-						placeholder="Find city"
-						className={s.input} />
-					<button 
-						onClick={onClick}
-						className={s.button} >
-							<span>Find</span>
-					</button>
-				</form> */}
+				
 				<button className={S.menuBtn} onClick={() => toggleMenu(!isMenuOpen)}>Menu</button>
 			</div>
 			<div className={cn(S.modalMenu, isMenuOpen && S.menuOpened)}>
 				<ul className={S.menuList}>
-					<li>Search</li>
+					<li onClick={() => toggleMenu(!isMenuOpen)}>
+						<NavLink to="/search">Search</NavLink>
+					</li>
 					<li>Saved cities</li>
 				</ul>
 			</div>
@@ -56,4 +31,4 @@ function Header({changeCity}: IProps) {
 	)
 }
 
-export default Header;
+export default observer(Header);
