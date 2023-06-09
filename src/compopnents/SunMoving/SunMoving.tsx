@@ -6,6 +6,7 @@ import { WeatherData } from "../../interfaces";
 
 import * as S from "./SunMoving.scss";
 import Icon from "../UI/Icon/Icon";
+import { parseDate } from "../../utils";
 
 interface Weather {
     selectedCityData: WeatherData
@@ -15,12 +16,6 @@ function SunMoving() {
     const { selectedCityData }: Weather = useMainStore();
     const { sunrise, sunset } = selectedCityData.sys;
     const sunny: any = useRef();
-
-    const parseDate = (date: number) => {
-        const dateString: string = new Date(date * 1000).toLocaleTimeString();
-        const [hour, minutes] = dateString.split(":")
-        return `${hour}:${minutes}`
-    }
 
     // useEffect(() => {
     //     const now = new Date().getTime();

@@ -43,3 +43,33 @@
         opacity: 1; /* Firefox */
     }
 }
+
+.savedLocationsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 30px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    
+    &::-webkit-scrollbar { /* Safari, Chrome */
+        display: none;
+    }
+}
+
+
+.locationsList {
+    padding: 30px 0;
+}
+.locationsTitle {
+    font-family: "Inter Bold";
+    color: #fff;
+    font-size: 18px;
+
+    & + p {
+        padding: 10px 0;
+        color: #fff;
+        font-size: 14px;
+        font-style: italic;
+    }
+}

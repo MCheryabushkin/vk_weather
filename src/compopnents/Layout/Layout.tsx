@@ -12,6 +12,7 @@ import { getOneDayWeather } from "../../helper";
 import DayForecast from "../DayForecast/DayForecast";
 import SunMoving from "../SunMoving/SunMoving";
 
+const INTERVAL_OF_DATA_REQUEST = 300000;
 
 function Layout() {
     const [isLoad, setLoading] = useState<Boolean>(false);
@@ -21,7 +22,7 @@ function Layout() {
     let defaultCity: string = "Saint Petersburg";
 
     useEffect(() => {
-        const interval = setInterval(getData, 300000);
+        const interval = setInterval(getData, INTERVAL_OF_DATA_REQUEST);
         if (parsedLocation) {
             if (typeof parsedLocation === 'string') {
                 mainStore.setCity(location);

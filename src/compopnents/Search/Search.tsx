@@ -1,4 +1,4 @@
-import React, { ReactNode, SyntheticEvent, useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { observer, useObserver } from "mobx-react";
 
 import { useMainStore } from "../../stores/MainContext";
@@ -9,13 +9,15 @@ import { parseSearchLocation } from "../../utils";
 import api from "../../api/api";
 import Card from "../Card/Card";
 import Icon from "../UI/Icon/Icon";
+import { WeatherData } from "../../interfaces";
 
-const INTERVAL_OF_DATA_REQUEST = 30000;
+const INTERVAL_OF_DATA_REQUEST = 300000;
 
 function Search() {
 	const [inputVal, setInput] = useState<string | number | readonly string[]>('');
 	const [isLoding, setLoading] = useState<boolean>(false);
-    const { city, setCity, selectedCityData, setSelectedCityData } = useMainStore();
+    const mainStore = useMainStore();
+    const { setCity, selectedCityData, setSelectedCityData } = mainStore;
     let interval: ReturnType<typeof setInterval>;
 
     useEffect(() => {
@@ -40,7 +42,7 @@ function Search() {
             fail: () => {
                 new Error("Something goes wrong");
             },
-            city,
+            city: mainStore.city,
         });
     }
     
@@ -109,6 +111,17 @@ function Search() {
                 ?  <Card key={selectedCityData.td} store={selectedCityData} />
                 : <div>Load data...</div>
         }
+
+        <div className={S.locationsList}>
+            <p className={S.locationsTitle}>Saved locations</p>
+            {mainStore.savedLocations.length === 0 && <p>No saved locations</p>}
+
+            <div className={S.savedLocationsContainer}>
+                { mainStore.savedLocations.map((location: WeatherData) => {
+                    return <Card key={location.dt} store={location} small />
+                }) }
+            </div>
+        </div>
     </>))
 }
 

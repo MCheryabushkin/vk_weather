@@ -6,6 +6,8 @@ interface IMainStore {
     selectedCityData: WeatherData | {},
     setSelectedCityData: (data: WeatherData) => void,
     savedLocations: WeatherData[] | [],
+    saveLocation: (location: WeatherData) => void,
+    removeSavedLocation: (location: WeatherData) => void,
 }
 
 
@@ -22,6 +24,17 @@ function MainStore(): IMainStore {
         },
 
         savedLocations: [],
+        saveLocation(location) {
+            this.savedLocations = [...this.savedLocations, location];
+        },
+        removeSavedLocation(location) {
+            const updatedLocations: WeatherData[] = [];
+            this.savedLocations.map((loc: WeatherData) => {
+                if (loc.name !== location.name)
+                    updatedLocations.push(loc);
+            });
+            this.savedLocations = updatedLocations;
+        }
     }
 }
 

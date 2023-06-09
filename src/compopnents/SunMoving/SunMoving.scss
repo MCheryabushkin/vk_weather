@@ -1,21 +1,21 @@
 .sunContainer {
-    max-width: 520px;
+    max-width: 420px;
 }
 
 .sunArea {
-    height: 200px;
+    height: 150px;
     position: relative;
     overflow: hidden;
 
     &:before {
         content: "";
         display: block;
-        width: 470px;
+        width: 390px;
         height: 430px;
         border-radius: 50%;
         border-top: 1px solid #FFF;
         position: absolute;
-        bottom: -293px;
+        bottom: -323px;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -30,9 +30,9 @@
     border-radius: 50%;
     animation: arc-move-anim-1 4s linear infinite alternate;
     position: absolute;
-    left: 50%;
+    left: 66%;
+    top: 45px;
     // left: var(--move-by-x);
-    top: 35px;
     transform: translateX(-50%);
 }
 

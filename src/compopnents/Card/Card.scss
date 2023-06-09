@@ -10,6 +10,9 @@
     max-width: 300px;
 }
 
+.locationContainer {
+    min-height: 76px;
+}
 .myLocation {
     margin-bottom: 8px;
     font-family: "Inter Bold";
@@ -43,4 +46,40 @@
 .weatherIcon {
     margin: -16px 0 -10px;
     max-width: 70px;
+}
+
+.like {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    cursor: pointer;
+
+    &> svg {
+        width: 26px;
+        height: 26px;
+        color: transparent;
+    }
+
+    &.liked {
+        &> svg {
+            color: #F76D57;
+        }
+    }
+}
+
+.time {
+    margin-top: 4px;
+}
+
+.smallCard {
+    margin-top: 50px;
+    max-width: 220px;
+    min-width: 220px;
+    position: relative;
+
+    img {
+        position: absolute;
+        left: 0;
+        top: -30px;
+    }
 }
