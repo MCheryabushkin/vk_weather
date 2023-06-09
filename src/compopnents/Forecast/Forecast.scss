@@ -1,10 +1,15 @@
 .forecast {
-    padding: 0 20px;
+    padding: 50px 0;
 }
 
 .forecastList {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 820px;
+    max-width: 820px;  
+    overflow-x: auto;
+    
+    &::-webkit-scrollbar { /* Safari, Chrome */
+        display: none;
+    }
 }

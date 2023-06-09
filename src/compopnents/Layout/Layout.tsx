@@ -9,6 +9,8 @@ import { parseURLLocation } from "../../utils";
 import ForecastList from "../Forecast/Forecast";
 import Weather from "../Weather/Weather";
 import { getOneDayWeather } from "../../helper";
+import DayForecast from "../DayForecast/DayForecast";
+import SunMoving from "../SunMoving/SunMoving";
 
 
 function Layout() {
@@ -19,6 +21,7 @@ function Layout() {
     let defaultCity: string = "Saint Petersburg";
 
     useEffect(() => {
+        const interval = setInterval(getData, 300000);
         if (parsedLocation) {
             if (typeof parsedLocation === 'string') {
                 mainStore.setCity(location);
@@ -49,6 +52,8 @@ function Layout() {
                 () => console.log("Location not found")
             );
         }
+
+        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
@@ -75,6 +80,8 @@ function Layout() {
             {isLoad ? (
                 <>
                     <Weather />
+                    <DayForecast />
+                    <SunMoving />
                     <ForecastList />
                 </>
             ) : (

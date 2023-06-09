@@ -1,0 +1,46 @@
+.dayWeatherContainer {
+    margin: 50px 0;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    width: max-content;
+    max-width: calc(100vw - 128px);    
+    overflow-x: auto;
+    
+    &::-webkit-scrollbar { /* Safari, Chrome */
+        display: none;
+    }
+
+    @media screen and (max-width: 567px) {
+        max-width: calc(100vw - 88px);    
+    }
+}
+
+.hourInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+        margin: -10px 0 -10px;
+        max-width: 80px;
+    }
+}
+.time {
+    font-size: 14px;
+    line-height: 120%;
+    color: #fff;
+}
+
+.temp {
+    font-size: 18px;
+    line-height: 120%;
+    color: #fff;
+    font-family: "Inter Bold";
+}

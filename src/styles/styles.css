@@ -64,6 +64,7 @@ html, body {
     font-family: "Inter", sans-serif;
     min-height: 100vh;
     background: #81BCFF;
+    overflow-x: hidden;
 }
 body {
     background: linear-gradient(0deg, #2359B0 0.68%, #2D72E2 58.23%, #A3CEFF 99.34%);

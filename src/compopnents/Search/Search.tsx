@@ -2,27 +2,36 @@ import React, { ReactNode, SyntheticEvent, useEffect, useState } from "react";
 import { observer, useObserver } from "mobx-react";
 
 import { useMainStore } from "../../stores/MainContext";
-import { NavLink } from "react-router-dom";
 import { getOneDayWeather } from "../../helper";
 
 import * as S from "./Search.scss";
-import { parseSearchLocation, tempConvert } from "../../utils";
+import { parseSearchLocation } from "../../utils";
 import api from "../../api/api";
-import { WeatherData } from "../../interfaces";
 import Card from "../Card/Card";
 import Icon from "../UI/Icon/Icon";
+
+const INTERVAL_OF_DATA_REQUEST = 30000;
 
 function Search() {
 	const [inputVal, setInput] = useState<string | number | readonly string[]>('');
 	const [isLoding, setLoading] = useState<boolean>(false);
     const { city, setCity, selectedCityData, setSelectedCityData } = useMainStore();
+    let interval: ReturnType<typeof setInterval>;
 
     useEffect(() => {
+        interval = setInterval(getData, INTERVAL_OF_DATA_REQUEST);
+
         if (selectedCityData?.weather) {
             setLoading(true);
             return;
         }
+        
+        getData();
 
+        return () => clearInterval(interval);
+    }, []);
+
+    function getData() {
         getOneDayWeather({
             success: (res) => {
                 setSelectedCityData(res);
@@ -33,8 +42,8 @@ function Search() {
             },
             city,
         });
-    }, []);
-
+    }
+    
     const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = val.target;
 		
@@ -57,6 +66,9 @@ function Search() {
             cityByCoord()
                 .then(data => {
                     setCity(data.name);
+                    setSelectedCityData(data);
+                    clearInterval(interval);
+                    interval = setInterval(getData, INTERVAL_OF_DATA_REQUEST);
                 })
                 .catch(() => console.log("City not found"));
         } else {
@@ -64,6 +76,8 @@ function Search() {
                 success: (res) => {
                     setCity(res.name);
                     setSelectedCityData(res);
+                    clearInterval(interval);
+                    interval = setInterval(getData, INTERVAL_OF_DATA_REQUEST);
                 },
                 fail: () => {
                     alert("City not found");
@@ -76,7 +90,6 @@ function Search() {
 	}
 
     return useObserver(() => (<>
-        <NavLink to="/">Home</NavLink>
         <form onSubmit={onClick} className={S.form}>
             <button 
                 className={S.button} 
@@ -93,7 +106,7 @@ function Search() {
 
         {
             isLoding
-                ?  <Card store={selectedCityData} />
+                ?  <Card key={selectedCityData.td} store={selectedCityData} />
                 : <div>Load data...</div>
         }
     </>))

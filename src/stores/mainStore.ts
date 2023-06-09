@@ -5,6 +5,7 @@ interface IMainStore {
     setCity: (city: string) => void,
     selectedCityData: WeatherData | {},
     setSelectedCityData: (data: WeatherData) => void,
+    savedLocations: WeatherData[] | [],
 }
 
 
@@ -18,7 +19,9 @@ function MainStore(): IMainStore {
         selectedCityData: {},
         setSelectedCityData(data) {
             this.selectedCityData = data;
-        }
+        },
+
+        savedLocations: [],
     }
 }
 

@@ -1,5 +1,5 @@
 .header {
-    padding: 10px 20px;
+    padding: 30px 0 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,23 +17,29 @@
 }
 
 .modalMenu {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
-    width: 100vw;
+    right: -400px;
     height: 100vh;
-    background: rgba(0,0,0,.8);
-
+    width: 400px;
+    transition: all 1.5s cubic-bezier(.8, 0, .33, 1);
+    border-radius: 0% 0% 50% 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateX(-3000px);
-    transition: all linear .8s;
     z-index: 10;
+    
+    @media screen and (max-width: 567px) {
+        width: 320px;
+        right: -320px;
+    }
 
     &.menuOpened {
-        transform: translateX(0);
+        right: 0;
+        border-radius: 0% 0% 0% 0%;
+        background: rgba(255, 255, 255, 0.8);
     }
+
 }
 
 .menuList {
@@ -41,4 +47,58 @@
     padding: 0;
     list-style: none;
     text-align: center;
+}
+
+.menuBtn {
+    cursor: pointer;
+    z-index: 11;
+}
+
+.line {
+    padding: 0;
+    width: 30px;
+    background: #fff;
+    height: 2px;
+    margin: 5px 0;
+    transition: all 700ms cubic-bezier(.9, 0, .33, 1);
+
+    &.line1 {
+        width: 30px;
+        transform: rotate(0) translateY(0);
+
+        &.lineCross {
+            width: 30px;
+            transform: rotate(45deg) translateY(10px);
+        }
+    }
+
+    &.line2 {
+        width: 26px;
+        transform: translateX(4px);
+
+        &.lineFadeOut {
+            width: 28px;
+            transform: translate(30px);
+            opacity: 0;
+        }
+    }
+
+    &.line3 {
+        width: 20px;
+        transform: rotate(0) translateY(0) translateX(10px);
+
+        &.lineCross {
+            width: 30px;
+            transform: rotate(-45deg) translateY(-10px);
+        }
+    }
+}
+
+.link {
+    margin: 20px 0;
+    text-decoration: none;
+    font-family: "Inter Bold";
+    color: rgba(0,0,0,0.9);
+    font-weight: 700;
+    text-transform: uppercase;
 }

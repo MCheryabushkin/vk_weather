@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import ForecastItem from "../ForecastItem/ForecastItem";
 
-import * as s from "./forecast.scss";
 import { DayWeather } from "../../interfaces";
 import { useMainStore } from "../../stores/MainContext";
+
+import * as S from "./Forecast.scss";
 
 function ForecastList() {
     const [list, setList] = useState<DayWeather[]>([]);
@@ -35,9 +36,8 @@ function ForecastList() {
     if (!isLoad) return <></>;
     
     return(
-        <div className={s.forecast}>
-            <h3>Forecast for week:</h3>
-            <div className={s.forecastList}>
+        <div className={S.forecast}>
+            <div className={S.forecastList}>
                 { renderForecastCards() }
             </div>
         </div>

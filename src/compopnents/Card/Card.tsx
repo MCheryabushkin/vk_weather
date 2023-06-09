@@ -3,7 +3,6 @@ import { WeatherData } from "../../interfaces";
 
 import * as S from "./Card.scss";
 import { tempConvert } from "../../utils";
-import { observer } from "mobx-react";
 
 
 function Card({store}: {store: WeatherData}) {
@@ -26,4 +25,4 @@ function Card({store}: {store: WeatherData}) {
     )
 }
 
-export default observer(Card);
+export default Card;
