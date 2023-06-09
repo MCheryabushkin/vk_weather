@@ -10,6 +10,7 @@ import { parseSearchLocation, tempConvert } from "../../utils";
 import api from "../../api/api";
 import { WeatherData } from "../../interfaces";
 import Card from "../Card/Card";
+import Icon from "../UI/Icon/Icon";
 
 function Search() {
 	const [inputVal, setInput] = useState<string | number | readonly string[]>('');
@@ -76,18 +77,18 @@ function Search() {
 
     return useObserver(() => (<>
         <NavLink to="/">Home</NavLink>
-        <form onSubmit={onClick}>
+        <form onSubmit={onClick} className={S.form}>
+            <button 
+                className={S.button} 
+                type="submit">
+                <Icon type="find" />
+            </button>
             <input type="text" 
                 name="search"
                 onChange={onChange} 
                 value={inputVal}
                 placeholder="Search city, country,  or location"
                 className={S.input} />
-            {/* <button 
-                className={S.button} 
-                type="submit">
-                    <span>Find</span>
-            </button> */}
         </form>
 
         {
