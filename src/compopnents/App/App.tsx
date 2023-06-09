@@ -4,15 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { MainProvider } from "../../stores/MainContext";
 import Routes from "../Routes/Routes";
 
-import "./App.scss";
+import * as S from "./App.scss";
 import Header from "../Header/Header";
 
 function App() {
     return (
         <MainProvider>
             <BrowserRouter>
-                <Header />
-                <Routes />
+                <div className={S.root}>
+                    <Header />
+                    <Routes />
+                </div>
             </BrowserRouter>
         </MainProvider>
     );

@@ -45,10 +45,10 @@ function Layout() {
                             mainStore.setSelectedCityData(res);
                             setLoading(true);
                         })
-                }
+                },
+                () => console.log("Location not found")
             );
         }
-
     }, []);
 
     useEffect(() => {
@@ -72,7 +72,6 @@ function Layout() {
 
     return useObserver(() => (
         <>
-            {/* <Header /> */}
             {isLoad ? (
                 <>
                     <Weather />

@@ -1,17 +1,38 @@
+import React, { ReactNode, SyntheticEvent, useEffect, useState } from "react";
 import { observer, useObserver } from "mobx-react";
-import React, { SyntheticEvent, useState } from "react";
 
 import { useMainStore } from "../../stores/MainContext";
 import { NavLink } from "react-router-dom";
 import { getOneDayWeather } from "../../helper";
 
 import * as S from "./Search.scss";
-import { parseSearchLocation } from "../../utils";
+import { parseSearchLocation, tempConvert } from "../../utils";
 import api from "../../api/api";
+import { WeatherData } from "../../interfaces";
+import Card from "../Card/Card";
 
 function Search() {
 	const [inputVal, setInput] = useState<string | number | readonly string[]>('');
-    const { setCity, setSelectedCityData } = useMainStore();
+	const [isLoding, setLoading] = useState<boolean>(false);
+    const { city, setCity, selectedCityData, setSelectedCityData } = useMainStore();
+
+    useEffect(() => {
+        if (selectedCityData?.weather) {
+            setLoading(true);
+            return;
+        }
+
+        getOneDayWeather({
+            success: (res) => {
+                setSelectedCityData(res);
+                setLoading(true);
+            },
+            fail: () => {
+                new Error("Something goes wrong");
+            },
+            city,
+        });
+    }, []);
 
     const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = val.target;
@@ -36,7 +57,7 @@ function Search() {
                 .then(data => {
                     setCity(data.name);
                 })
-                .catch(() => console.log("City not found"))
+                .catch(() => console.log("City not found"));
         } else {
             getOneDayWeather({
                 success: (res) => {
@@ -60,16 +81,20 @@ function Search() {
                 name="search"
                 onChange={onChange} 
                 value={inputVal}
-                placeholder="Find city"
+                placeholder="Search city, country,  or location"
                 className={S.input} />
-            <button 
+            {/* <button 
                 className={S.button} 
                 type="submit">
                     <span>Find</span>
-            </button>
+            </button> */}
         </form>
 
-
+        {
+            isLoding
+                ?  <Card store={selectedCityData} />
+                : <div>Load data...</div>
+        }
     </>))
 }
 

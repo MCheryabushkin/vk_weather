@@ -1,49 +1,59 @@
 @font-face {
-    font-family: "Open Sans";
-    src: url("/assets/OpenSans/OpenSans-Regular.eot");
-    src: url("/assets/OpenSans/OpenSans-Regular.eot?#iefix") format("embedded-opentype"), 
-        url("/assets/OpenSans/OpenSans-Regular.woff") format("woff"), 
-        url("/assets/OpenSans/OpenSans-Regular.ttf") format("truetype");
+    font-family: "Inter";
+    src: url("/assets/Inter/Inter-Regular.otf");
+    src: url("/assets/Inter/Inter-Regular.otf?#iefix") format("embedded-opentype"), 
+        /* url("/assets/Inter/Inter-Regular.woff") format("woff"),  */
+        url("/assets/Inter/Inter-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Open Sans Bold";
-    src: url("/assets/OpenSans/OpenSans-Bold.eot");
-    src: url("/assets/OpenSans/OpenSans-Bold.eot?#iefix") format("embedded-opentype"), 
-        url("/assets/OpenSans/OpenSans-Bold.woff") format("woff"), 
-        url("/assets/OpenSans/OpenSans-Bold.ttf") format("truetype");
+    font-family: "Inter Bold";
+    src: url("/assets/Inter/Inter-Bold.otf");
+    src: url("/assets/Inter/Inter-Bold.otf?#iefix") format("embedded-opentype"), 
+        /* url("/assets/Inter/Inter-Bold.woff") format("woff"),  */
+        url("/assets/Inter/Inter-Bold.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Open Sans SemiBold";
-    src: url("/assets/OpenSans/OpenSans-SemiBold.eot");
-    src: url("/assets/OpenSans/OpenSans-SemiBold.eot?#iefix") format("embedded-opentype"), 
-        url("/assets/OpenSans/OpenSans-SemiBold.woff") format("woff"), 
-        url("/assets/OpenSans/OpenSans-SemiBold.ttf") format("truetype");
+    font-family: "Inter SemiBold";
+    src: url("/assets/Inter/Inter-SemiBold.otf");
+    src: url("/assets/Inter/Inter-SemiBold.otf?#iefix") format("embedded-opentype"), 
+        /* url("/assets/Inter/Inter-SemiBold.woff") format("woff"),  */
+        url("/assets/Inter/Inter-SemiBold.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Open Sans ExtraBold";
-    src: url("/assets/OpenSans/OpenSans-ExtraBold.eot");
-    src: url("/assets/OpenSans/OpenSans-ExtraBold.eot?#iefix") format("embedded-opentype"), 
-        url("/assets/OpenSans/OpenSans-ExtraBold.woff") format("woff"), 
-        url("/assets/OpenSans/OpenSans-ExtraBold.ttf") format("truetype");
+    font-family: "Inter ExtraBold";
+    src: url("/assets/Inter/Inter-ExtraBold.otf");
+    src: url("/assets/Inter/Inter-ExtraBold.otf?#iefix") format("embedded-opentype"), 
+        /* url("/assets/Inter/Inter-ExtraBold.woff") format("woff"),  */
+        url("/assets/Inter/Inter-ExtraBold.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Open Sans Light";
-    src: url("/assets/OpenSans/OpenSans-Light.eot");
-    src: url("/assets/OpenSans/OpenSans-Light.eot?#iefix") format("embedded-opentype"), 
-        url("/assets/OpenSans/OpenSans-Light.woff") format("woff"), 
-        url("/assets/OpenSans/OpenSans-Light.ttf") format("truetype");
+    font-family: "Inter Light";
+    src: url("/assets/Inter/Inter-Light.otf");
+    src: url("/assets/Inter/Inter-Light.otf?#iefix") format("embedded-opentype"), 
+        /* url("/assets/Inter/Inter-Light.woff") format("woff"),  */
+        url("/assets/Inter/Inter-Light.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter Regular";
+    src: url("/assets/Inter/Inter-Regular.otf");
+    src: url("/assets/Inter/Inter-Regular.otf?#iefix") format("embedded-opentype"), 
+        /* url("/assets/Inter/Inter-Regular.woff") format("woff"),  */
+        url("/assets/Inter/Inter-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -51,7 +61,12 @@
 html, body {
     margin: 0;
     padding: 0;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+    background: #81BCFF;
+}
+body {
+    background: linear-gradient(0deg, #2359B0 0.68%, #2D72E2 58.23%, #A3CEFF 99.34%);
 }
 
 p {

@@ -3,16 +3,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px -1px 16px 3px #bcbcbc;
 }
 
 .city {
-    font-size: 20px;
+    font-size: 24px;
+    font-family: "Inter ExtraBold";
     text-transform: capitalize;
+    color: #FFF;
 }
 
 .menuBtn {
-    z-index: 2;
+    z-index: 12;
 }
 
 .modalMenu {
@@ -28,6 +29,7 @@
     justify-content: center;
     transform: translateX(-3000px);
     transition: all linear .8s;
+    z-index: 10;
 
     &.menuOpened {
         transform: translateX(0);
