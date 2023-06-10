@@ -72,3 +72,40 @@
         color: #fff;
     }
 }
+
+@media screen and (max-width: 567px) {
+    .weather {
+        align-items: center;
+    }
+    .mainBlock {
+        margin-bottom: 14px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tempWrapper {
+        margin: 0 0 12px;
+    }   
+
+    .nameWrapper {
+        text-align: center;
+        font-size: 18px;
+
+        &> p {
+            margin-bottom: 5px;
+        }
+    }
+
+    .infoWrapper {
+        padding: 5px 12px;
+
+        p {
+            font-size: 14px;
+        }
+    
+        .icon {
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}

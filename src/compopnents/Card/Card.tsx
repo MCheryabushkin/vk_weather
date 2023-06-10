@@ -38,7 +38,6 @@ function Card({store, small = false}: {store: WeatherData, small?: boolean}) {
 
             saveLocation(store);
         }
-        toggleSavedLocation(!isLocationSaved);
     }
 
     return(
@@ -47,7 +46,7 @@ function Card({store, small = false}: {store: WeatherData, small?: boolean}) {
                 {!small && <p className={S.myLocation}>My location</p>}
                 <p>
                     <Link to="/" state={{ linkedCity: store.name }}  
-                    className={S.location}>{name}</Link>
+                        className={S.location}>{name}</Link>
                 </p>
                 {small && <div className={S.time}>{getLocalTime(store.timezone)}</div>}
                 <div className={cn(S.like, isLocationSaved && S.liked)} onClick={saveCurrentLocation}>
