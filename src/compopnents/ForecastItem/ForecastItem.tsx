@@ -1,9 +1,10 @@
 import React from "react";
 import api from "../../api/api";
-import { tempConvert } from "../../utils";
 
-import * as s from "./ForecastItem.scss";
 import { DayWeather } from "../../interfaces";
+import { addZero, tempConvert } from "../../utils";
+
+import * as S from "./ForecastItem.scss";
 
 interface IPropsItem {
     data: DayWeather;
@@ -22,20 +23,22 @@ enum Days {
 function ForecastItem({ data }: IPropsItem) {
     const getDay = () => {
         const date = new Date(data.dt * 1000);
-        return `${Days[date.getDay()]}, ${date.getDate()}`
+        const day = date.getDate();
+        const month = date.getMonth();
+        return (
+            <div className={S.dateWrapper}>
+                <span className={S.dayOfWeek}>{Days[date.getDay()]}</span>
+                <span className={S.date}>{addZero(day, 2)}/{addZero(month, 2)}</span>
+            </div>
+        )
     }
     const { weather, temp } = data;
 
     return(
-        <div>
+        <div className={S.root}>
             <div>{getDay()}</div>
             <img src={api.getImgUrl(weather[0].icon)} alt="" />
-            <div className={s.tempList}>
-                <p>Night: {tempConvert(temp.night)}&#8451;</p>
-                {/* <p>Morning: {tempConvert(temp.morn)}&#8451;</p> */}
-                <p>Day: {tempConvert(temp.day)}&#8451;</p>
-                {/* <p>Evening: {tempConvert(temp.eve)}&#8451;</p> */}
-            </div>
+            <p className={S.temp}>{tempConvert(temp.day)}º/{tempConvert(temp.night)}º</p>
         </div>
     );
 }

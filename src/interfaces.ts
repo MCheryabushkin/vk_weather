@@ -73,3 +73,19 @@ export interface DayWeather {
     pop: number,
     uvi: number
 }
+
+export interface ListWeatherItem {
+    dt: number,
+    main: IMain & {
+        sea_level: number,
+        grnd_level: number,
+        temp_kf: number,
+    },
+    weather: IWeather[],
+    clouds: Clouds,
+    wind: Wind,
+    visibility: number,
+    pop: number,
+    sys: Sys,
+    dt_txt: string,
+}

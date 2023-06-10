@@ -2,26 +2,22 @@ import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import ForecastItem from "../ForecastItem/ForecastItem";
 
-import * as s from "./forecast.scss";
 import { DayWeather } from "../../interfaces";
+import { useMainStore } from "../../stores/MainContext";
 
-interface IPForecastList {
-    coord: {
-        lat: number,
-        lon: number
-    }
-}
+import * as S from "./Forecast.scss";
 
-function ForecastList(props: IPForecastList) {
+function ForecastList() {
     const [list, setList] = useState<DayWeather[]>([]);
     const [isLoad, setLoading] = useState<Boolean>(false);
+    const { selectedCityData } = useMainStore();
 
     useEffect(() => {
         getData();
     }, []);
 
     function getData() {
-        const { lat, lon } = props.coord;
+        const { lat, lon } = selectedCityData.coord;
 
         api.get7DaysForecast(lat, lon)
             .then(res => {
@@ -40,9 +36,8 @@ function ForecastList(props: IPForecastList) {
     if (!isLoad) return <></>;
     
     return(
-        <div className={s.forecast}>
-            <h3>Forecast for week:</h3>
-            <div className={s.forecastList}>
+        <div className={S.forecast}>
+            <div className={S.forecastList}>
                 { renderForecastCards() }
             </div>
         </div>

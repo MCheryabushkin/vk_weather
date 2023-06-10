@@ -1,11 +1,17 @@
 import { tempConvert } from "./temperature";
 import { windDirection } from "./windDirection";
 import { getLocalTime } from "./localTime";
-import { parseLocation } from "./parseLocation";
+import { parseURLLocation } from "./parseURLLocation";
+import { parseSearchLocation } from "./parseSearchLocation";
+import { addZero } from "./addZero";
+import { parseDate } from "./parseDate";
 
 export { 
     tempConvert,
     windDirection,
     getLocalTime,
-    parseLocation,
+    parseURLLocation,
+    parseSearchLocation,
+    addZero,
+    parseDate,
 }

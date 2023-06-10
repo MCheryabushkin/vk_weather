@@ -50,7 +50,7 @@ module.exports = {
                 type: 'asset/resource'
             },
             {
-                test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+                test: /\.(woff(2)?|eot|ttf|otf)$/,
                 type: 'asset/inline',
             },
             {
@@ -91,7 +91,31 @@ module.exports = {
                     },
                   },
                   'postcss-loader', 'sass-loader']
-            }
+            },
+            {
+                test: /\.svg$/,
+                exclude: '/node_modules',
+                oneOf: [
+                  {
+                    issuer: /\.(j|t)sx?$/,
+                    use: [
+                      {
+                        loader: 'babel-loader',
+                      },
+                      {
+                        loader: 'svg-react-loader',
+                      },
+                    ],
+                  },
+                  {
+                    loader: 'file-loader',
+                    options: {
+                      name: 'static/[name].[ext]',
+                      outputPath: 'images/',
+                    },
+                  },
+                ],
+              },
         ]
     },
 

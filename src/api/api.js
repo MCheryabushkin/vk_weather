@@ -29,6 +29,10 @@ class api {
     async getCityByCoord(lat, lon) {
         return await this.getResource(`weather?lat=${lat}&lon=${lon}&appid=${KEYS.API_KEY}`);
     }
+    
+    async getWeatherForDay(lat, lon) {
+        return await this.getResource(`forecast?lat=${lat}&lon=${lon}&appid=${KEYS.API_KEY}`);
+    }
 }
 
 export default new api();
