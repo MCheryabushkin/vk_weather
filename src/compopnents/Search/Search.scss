@@ -57,7 +57,6 @@
     }
 }
 
-
 .locationsList {
     padding: 30px 0;
 }
@@ -71,5 +70,32 @@
         color: #fff;
         font-size: 14px;
         font-style: italic;
+    }
+}
+
+.seelctedLocation {
+    animation: cardFadeIn .6s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+@mixin order($selector) {
+  @for $i from 0 to 10 {
+    &.savedCard#{$i} {
+        animation: cardFadeIn $i * 0.3s ease-in-out;
+    }
+  }
+}
+
+.savedCard {
+    @include order('.savedCard');
+}
+
+@keyframes cardFadeIn {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

@@ -21,11 +21,13 @@
 }
 
 .location {
+    position: relative;
     text-transform: capitalize;
     font-size: 14px;
     line-height: 120%;
     color: #fff;
     text-decoration: none;
+    z-index: 1;
     cursor: pointer;
 }
 

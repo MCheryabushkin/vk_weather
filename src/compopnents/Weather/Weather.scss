@@ -3,6 +3,8 @@
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
+
+    animation: showWeather 2s ease;
 }
 
 .mainBlock {
@@ -108,4 +110,11 @@
             height: 16px;
         }
     }
+}
+
+
+
+@keyframes showWeather {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }

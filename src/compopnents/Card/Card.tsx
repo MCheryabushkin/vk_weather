@@ -7,14 +7,23 @@ import { getLocalTime, tempConvert } from "../../utils";
 import Icon from "../UI/Icon/Icon";
 
 import { useMainStore } from "../../stores/MainContext";
+import { IMainStore } from "../../stores/mainStore";
 import { observer, useObserver } from "mobx-react";
 
 import * as S from "./Card.scss";
 
-function Card({store, small = false}: {store: WeatherData, small?: boolean}) {
+function Card({
+    store, 
+    small = false,
+    classNames,
+}: {
+    store: WeatherData, 
+    small?: boolean,
+    classNames?: string,
+}) {
     const { weather, main, name } = store;
     const { temp, temp_max, temp_min } = main;
-    const mainStore = useMainStore();
+    const mainStore: IMainStore = useMainStore();
     const [isLocationSaved, toggleSavedLocation] = useState<boolean>(false);
     const { savedLocations, removeSavedLocation, saveLocation } = mainStore;
 
@@ -41,7 +50,7 @@ function Card({store, small = false}: {store: WeatherData, small?: boolean}) {
     }
 
     return(
-        useObserver(() => <div className={cn(S.currentCity, small && S.smallCard)}>
+        useObserver(() => <div className={cn(S.currentCity, small && S.smallCard, classNames)}>
             <div className={S.locationContainer}>
                 {!small && <p className={S.myLocation}>My location</p>}
                 <p>
