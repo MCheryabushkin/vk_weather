@@ -1,6 +1,6 @@
 import { WeatherData } from "../interfaces";
 
-interface IMainStore {
+export interface IMainStore {
     city: string,
     setCity: (city: string) => void,
     selectedCityData: WeatherData | {},

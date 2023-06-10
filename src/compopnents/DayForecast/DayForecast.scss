@@ -11,6 +11,7 @@
     width: max-content;
     max-width: calc(100vw - 128px);    
     overflow-x: auto;
+    animation: dayWeatherContainer .8s linear;
     
     &::-webkit-scrollbar { /* Safari, Chrome */
         display: none;
@@ -43,4 +44,10 @@
     line-height: 120%;
     color: #fff;
     font-family: "Inter Bold";
+}
+
+
+@keyframes dayWeatherContainer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
 }

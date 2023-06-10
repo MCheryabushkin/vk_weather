@@ -86,6 +86,7 @@ module.exports = {
                         esModule: true,
                         modules: {
                             namedExport: true,
+                            localIdentName: '[name]__[local]__[hash:base64:5]'
                         },
                         sourceMap: true
                     },

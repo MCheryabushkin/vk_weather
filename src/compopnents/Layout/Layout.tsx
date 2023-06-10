@@ -12,12 +12,13 @@ import { getOneDayWeather } from "../../helper";
 import DayForecast from "../DayForecast/DayForecast";
 import SunMoving from "../SunMoving/SunMoving";
 import { WeatherData } from "../../interfaces";
+import { IMainStore } from "../../stores/mainStore";
 
 const INTERVAL_OF_DATA_REQUEST = 300000;
 
 function Layout() {
     const [isLoad, setLoading] = useState<Boolean>(false);
-    const mainStore = useMainStore();
+    const mainStore: IMainStore = useMainStore();
     const { location } = useParams();
     const parsedLocation = parseURLLocation(location);
     let { state } = useLocation();

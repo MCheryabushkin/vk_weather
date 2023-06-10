@@ -17,20 +17,6 @@ function SunMoving() {
     const { sunrise, sunset } = selectedCityData.sys;
     const sunny: any = useRef();
 
-    // useEffect(() => {
-    //     const now = new Date().getTime();
-    //     const diffRise = now - sunrise;
-    //     const diffSet = sunset - now;
-    //     if (sunny.current) {
-    //         if (diffRise < 0) {
-    //             sunny.current.style.visibility = "hidden"
-    //         } else {
-    //             const percent = (now / now) * 10;
-    //             sunny.current.style.setProperty("--move-by-x", percent);
-    //         }
-    //     }
-    // }, []);
-
     return (
         <div className={S.sunContainer}>
             <div className={S.sunArea}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import ForecastItem from "../ForecastItem/ForecastItem";
 
-import { DayWeather } from "../../interfaces";
+import { DayWeather, WeatherData } from "../../interfaces";
 import { useMainStore } from "../../stores/MainContext";
 
 import * as S from "./Forecast.scss";
@@ -10,7 +10,7 @@ import * as S from "./Forecast.scss";
 function ForecastList() {
     const [list, setList] = useState<DayWeather[]>([]);
     const [isLoad, setLoading] = useState<Boolean>(false);
-    const { selectedCityData } = useMainStore();
+    const { selectedCityData }: { selectedCityData: WeatherData } = useMainStore();
 
     useEffect(() => {
         getData();

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import cn from "classnames";
+import { observer, useObserver } from "mobx-react";
 
 import { useMainStore } from "../../stores/MainContext";
-import { observer, useObserver } from "mobx-react";
+import { IMainStore } from "../../stores/mainStore";
+
+import cn from "classnames";
 
 import * as S from "./Header.scss";
 
 function Header() {
 	const [isMenuOpen, toggleMenu] = useState<Boolean>(false);
 	const [location, setLocation] = useState<string>(window.location.pathname)
-    const mainStore = useMainStore();
+    const mainStore: IMainStore = useMainStore();
 	
 	useEffect(() => {
 		setLocation(window.location.pathname);

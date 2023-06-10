@@ -3,6 +3,8 @@
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
+
+    animation: showWeather 2s ease;
 }
 
 .mainBlock {
@@ -71,4 +73,48 @@
         height: 25px;
         color: #fff;
     }
+}
+
+@media screen and (max-width: 567px) {
+    .weather {
+        align-items: center;
+    }
+    .mainBlock {
+        margin-bottom: 14px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tempWrapper {
+        margin: 0 0 12px;
+    }   
+
+    .nameWrapper {
+        text-align: center;
+        font-size: 18px;
+
+        &> p {
+            margin-bottom: 5px;
+        }
+    }
+
+    .infoWrapper {
+        padding: 5px 12px;
+
+        p {
+            font-size: 14px;
+        }
+    
+        .icon {
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+
+
+@keyframes showWeather {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
