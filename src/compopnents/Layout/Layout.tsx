@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { observer, useObserver } from "mobx-react";
 
 import api from "../../api/api";
@@ -11,6 +11,7 @@ import Weather from "../Weather/Weather";
 import { getOneDayWeather } from "../../helper";
 import DayForecast from "../DayForecast/DayForecast";
 import SunMoving from "../SunMoving/SunMoving";
+import { WeatherData } from "../../interfaces";
 
 const INTERVAL_OF_DATA_REQUEST = 300000;
 
@@ -19,6 +20,7 @@ function Layout() {
     const mainStore = useMainStore();
     const { location } = useParams();
     const parsedLocation = parseURLLocation(location);
+    let { state } = useLocation();
     let defaultCity: string = "Saint Petersburg";
 
     useEffect(() => {
@@ -39,19 +41,20 @@ function Layout() {
                     .catch(() => console.log("City not found"))
             }
         } else {
-            navigator.geolocation.getCurrentPosition(
-                async (e) => {
-                    const { latitude, longitude } = e.coords;
+            if (!state)
+                navigator.geolocation.getCurrentPosition(
+                    async (e) => {
+                        const { latitude, longitude } = e.coords;
 
-                    await api.getCityByCoord(latitude, longitude)
-                        .then((res) => {
-                            mainStore.setCity(res.name);
-                            mainStore.setSelectedCityData(res);
-                            setLoading(true);
-                        })
-                },
-                () => console.log("Location not found")
-            );
+                        await api.getCityByCoord(latitude, longitude)
+                            .then((res) => {
+                                mainStore.setCity(res.name);
+                                mainStore.setSelectedCityData(res);
+                                setLoading(true);
+                            })
+                    },
+                    () => console.log("Location not found")
+                );
         }
 
         return () => clearInterval(interval);
@@ -63,6 +66,17 @@ function Layout() {
     }, [mainStore.city]);
 
     function getData() {
+        if (state && state.linkedCity) {
+            if (mainStore.savedLocations.length) {
+                const savedCity = mainStore.savedLocations.find((city: WeatherData) => city.name === state.linkedCity);
+                if (savedCity) {
+                    mainStore.setSelectedCityData(savedCity);
+                    setLoading(true);
+                    return;
+                }
+            }
+        }
+
         getOneDayWeather({
             success: (res) => {
                 mainStore.setSelectedCityData(res);

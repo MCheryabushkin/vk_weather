@@ -1,15 +1,16 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { observer, useObserver } from "mobx-react";
 
+import api from "../../api/api";
 import { useMainStore } from "../../stores/MainContext";
 import { getOneDayWeather } from "../../helper";
-
-import * as S from "./Search.scss";
 import { parseSearchLocation } from "../../utils";
-import api from "../../api/api";
+
 import Card from "../Card/Card";
 import Icon from "../UI/Icon/Icon";
 import { WeatherData } from "../../interfaces";
+
+import * as S from "./Search.scss";
 
 const INTERVAL_OF_DATA_REQUEST = 300000;
 
@@ -22,6 +23,13 @@ function Search() {
 
     useEffect(() => {
         interval = setInterval(getData, INTERVAL_OF_DATA_REQUEST);
+
+        const cachedLocations = localStorage.getItem("locations");
+        
+        if (cachedLocations) {
+            const savedLocations = JSON.parse(cachedLocations);
+            mainStore.setLocationsFromCache(savedLocations);
+        }
 
         if (selectedCityData?.weather) {
             setLoading(true);

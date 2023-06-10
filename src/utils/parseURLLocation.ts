@@ -1,6 +1,6 @@
 export const parseURLLocation = (location: string): string | Record<string, string> | undefined => {
     const {search} = window.location;
-    const reg = new RegExp(/lat=\d+\.\d+&lon=\d+\.\d+/i);
+    const reg = new RegExp(/lat=-?\d+\.\d+&lon=-?\d+\.\d+/i);
     if (search && reg.test(search)) {
         const latLon = search.match(reg)[0];
         return latLon.split('&').reduce((acc: Record<string, string>, el: string) => {

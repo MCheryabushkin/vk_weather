@@ -8,6 +8,7 @@ interface IMainStore {
     savedLocations: WeatherData[] | [],
     saveLocation: (location: WeatherData) => void,
     removeSavedLocation: (location: WeatherData) => void,
+    setLocationsFromCache: (locations: WeatherData[]) => void,
 }
 
 
@@ -26,6 +27,7 @@ function MainStore(): IMainStore {
         savedLocations: [],
         saveLocation(location) {
             this.savedLocations = [...this.savedLocations, location];
+            localStorage.setItem("locations", JSON.stringify(this.savedLocations));
         },
         removeSavedLocation(location) {
             const updatedLocations: WeatherData[] = [];
@@ -34,6 +36,10 @@ function MainStore(): IMainStore {
                     updatedLocations.push(loc);
             });
             this.savedLocations = updatedLocations;
+            localStorage.setItem("locations", JSON.stringify(this.savedLocations));
+        },
+        setLocationsFromCache(locations) {
+            this.savedLocations = locations;
         }
     }
 }

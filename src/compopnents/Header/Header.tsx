@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
 import cn from "classnames";
 
-import * as S from "./Header.scss";
+import { useMainStore } from "../../stores/MainContext";
+import { observer, useObserver } from "mobx-react";
 
+import * as S from "./Header.scss";
 
 function Header() {
 	const [isMenuOpen, toggleMenu] = useState<Boolean>(false);
 	const [location, setLocation] = useState<string>(window.location.pathname)
+    const mainStore = useMainStore();
+	
 	useEffect(() => {
 		setLocation(window.location.pathname);
-	}, [window.location.pathname])
+	}, [window.location.pathname, mainStore.selectedCityData])
 
 	return(
-		<>
+		useObserver(() => <>
 			<div className={S.header}>
 				<p className={S.city}>{location === "/search" ? 'Search' : 'Home'}</p>
 				
@@ -31,11 +34,10 @@ function Header() {
 							{location === "/search" ? 'Home' : 'Search'}
 						</NavLink>
 					</li>
-					<li>Saved cities</li>
 				</ul>
 			</div>
-		</>
+		</>)
 	)
 }
 
-export default Header;
+export default observer(Header);

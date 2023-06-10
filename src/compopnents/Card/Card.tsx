@@ -1,8 +1,9 @@
-import React, { SyntheticEvent, useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import cn from "classnames";
 import { WeatherData } from "../../interfaces";
 
-import { getLocalTime, parseDate, tempConvert } from "../../utils";
+import { getLocalTime, tempConvert } from "../../utils";
 import Icon from "../UI/Icon/Icon";
 
 import { useMainStore } from "../../stores/MainContext";
@@ -30,11 +31,11 @@ function Card({store, small = false}: {store: WeatherData, small?: boolean}) {
         if (isLocationSaved) {
             removeSavedLocation(store);
         } else {
-            if (savedLocations.length === 5) {
-                alert("You can't save more then 5 location");
+            if (savedLocations.length === 10) {
+                alert("You can't save more then 10 location");
                 return;
             }
-            
+
             saveLocation(store);
         }
         toggleSavedLocation(!isLocationSaved);
@@ -44,7 +45,10 @@ function Card({store, small = false}: {store: WeatherData, small?: boolean}) {
         useObserver(() => <div className={cn(S.currentCity, small && S.smallCard)}>
             <div className={S.locationContainer}>
                 {!small && <p className={S.myLocation}>My location</p>}
-                <p className={S.location}>{name}</p>
+                <p>
+                    <Link to="/" state={{ linkedCity: store.name }}  
+                    className={S.location}>{name}</Link>
+                </p>
                 {small && <div className={S.time}>{getLocalTime(store.timezone)}</div>}
                 <div className={cn(S.like, isLocationSaved && S.liked)} onClick={saveCurrentLocation}>
                     <Icon type="heart" />

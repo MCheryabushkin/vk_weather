@@ -24,6 +24,9 @@
     text-transform: capitalize;
     font-size: 14px;
     line-height: 120%;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .weatherContainer {
@@ -80,6 +83,6 @@
     img {
         position: absolute;
         left: 0;
-        top: -30px;
+        top: -26px;
     }
 }
