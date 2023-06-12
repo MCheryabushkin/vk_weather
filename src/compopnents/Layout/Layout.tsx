@@ -41,22 +41,7 @@ function Layout() {
                     })
                     .catch(() => console.log("City not found"))
             }
-        } else {
-            if (!state)
-                navigator.geolocation.getCurrentPosition(
-                    async (e) => {
-                        const { latitude, longitude } = e.coords;
-
-                        await api.getCityByCoord(latitude, longitude)
-                            .then((res) => {
-                                mainStore.setCity(res.name);
-                                mainStore.setSelectedCityData(res);
-                                setLoading(true);
-                            })
-                    },
-                    () => console.log("Location not found")
-                );
-        }
+        } 
 
         return () => clearInterval(interval);
     }, []);
